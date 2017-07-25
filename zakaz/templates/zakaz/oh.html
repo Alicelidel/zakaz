@@ -1,0 +1,46 @@
+ {% extends 'zakaz/base.html' %}
+
+ {% for order in orders %}
+    <div class="post">
+        <div class="date">
+            Заказ был сделан: {{ order.made_on }}
+        </div>
+          <h1><a href="{% url 'order_detail' pk=order.pk %}">{{ order.id }}</a></h1>
+
+        <p> Статус заказа - {{ order.get_status_display }}</p>
+    </div>
+{% endfor %}
+
+
+
+
+
+ _________________________________________---
+ {% extends 'zakaz/base.html' %}
+
+
+    <body>
+        <div class="page-header">
+            <h1>Список заказов</h1>
+        </div>
+
+        {% for order in orders %}
+            <div class="content container">
+              <div class="row">
+               <div class="col-md-8">
+                <h1><a href="{% url 'order_detail' pk=order.pk %}">{{ order.id }}</a></h1>
+                <p>Блюда в заказе:    {% for dish in order.consists_of.all %}
+                                {{ dish }},
+                              {% endfor %}</p>
+                 <p> Статус заказа - {{ order.get_status_display }}</p>
+                 <p class="text-right">Заказ был сделан: {{ order.made_on }}</p>
+                 <p class="text-right">список цен:
+                   {%for dish in order.consists_of.all%}
+                                   {{dish.price}},
+                                  {% endfor %}
+                                      </p>
+                  </div>
+               </div>
+            </div>
+        {% endfor %}
+    </body>

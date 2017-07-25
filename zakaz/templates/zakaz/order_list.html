@@ -1,0 +1,13 @@
+{% extends 'zakaz/base.html' %}
+{% block content %}
+{% for order in orders %}
+   <div class="post">
+       <div class="date">
+           Заказ был сделан: {{ order.made_on }}
+       </div>
+         <h1><a href="{% url 'order_detail' pk=order.pk %}">{{ order.id }}</a></h1>
+
+       <p> Статус заказа - {{ order.get_status_display }}</p>
+   </div>
+{% endfor %}
+{% endblock content %}

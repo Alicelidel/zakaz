@@ -1,0 +1,18 @@
+{% extends 'zakaz/base.html' %}
+{% block content %}
+
+<div class="post">
+
+        <div class="date">
+            Заказ был сделан: {{ order.made_on }}
+        </div>
+
+        <div> В бургерной {{ order.rest_name }} , город: {{ order.rest_name.get_city_display }} </div>
+    <h1>{{ order.id }}</h1>
+    <p>Блюда в заказе:    {% for dish in order.consists_of.all %}
+                    {{ dish }},
+                  {% endfor %}</p>
+</div>
+
+
+{% endblock content %}
